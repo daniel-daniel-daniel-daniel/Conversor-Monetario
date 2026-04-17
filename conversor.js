@@ -1,6 +1,6 @@
 class moedaConverter {
     static paraBRL(valorInput) {
-        return new Intl.NumberFormat('pt_BR', {
+        return new Intl.NumberFormat('pt-BR', {
             style: 'currency',
             currency: 'BRL'
         }).format(valorInput)}
@@ -24,7 +24,10 @@ const dados = {
 }
 
 const moedaSelecionada = document.getElementById("moeda-select").value
+
+
 let formatar = ""
+let converterPara= ""
 
 //1 USD = 4,990 BRL
 //1 BRL = 0,20 USD
@@ -44,5 +47,7 @@ switch(moedaSelecionada){
 
 
 
-document.getElementById("resultadoFinal").innerText = formatar
+const mensagemResultado = `Conversão: ${document.getElementById("moeda-select")} + formatar`
+
+document.getElementById("resultadoFinal").innerText = mensagemResultado
 }
