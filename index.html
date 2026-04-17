@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor Monetário</title>
+</head>
+<body>
+    <h1>Conversor Monetário</h1>
+    <p>Digite um valor a ser convertido</p>
+
+    <label for="moeda">Escolha uma moeda:</label>
+    <select name="moeda" id="moeda-select" onchange="moedaCalcular()">
+    <option value="BRL">Real Brasileiro (R$)</option>
+    <option value="USD">Dólar Americano ($)</option>
+</select>
+
+
+<input type="number" oninput="moedaCalcular()" id="valorEntrada" placeholder="Digite um valor...">
+<button onclick="moedaCalcular()">Converter</button>
+<p id="resultadoFinal"></p>
+
+<script src="conversor.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+/*
+-------------------ANOTAÇÕES-------------------
+conversor.js(Ln 17, Col 1):
+
+    lógica da funçao em pseudocodigo:
+    objetivo:ReceberDados>Calcular>Formatar>Mostrar
+
+        dados: fator1=input // fator2=taxacambio
+        calculo = operaçao(fator1, fator2)
+        formataçao = funçaoformatar.formatar(calculo)
+        mostrar = funçaomostrar(formataçao)
+-------------------ANOTAÇÕES-------------------
+
+---------------CÓDIGO DESCARTADO---------------
+conversor.js: 
+ºfunction moedaCalcular() {
+    document.getElementById("resultadoFinal").innerText = 
+    moedaConverter.paraUSD(document.getElementById("valorEntrada").value / 4.99);
+}
+
+ºfunction convert() {
+    const valor = document.getElementById("valorEntrada").value
+    const resultado = valor / 4.99
+    
+
+    document.getElementById("resultadoFinal").innerText = "Resultado: " + resultado;
+};
+
+ºif (document.getElementById("moeda-select").value === "BRL"){
+    dados.taxaCambio = 0.20
+};
+---------------CÓDIGO DESCARTADO---------------
+*/
