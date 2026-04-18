@@ -5,17 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversor Monetário</title>
     <script src="seletor.js" defer></script>
+    <script src="conversor.js" defer></script>
 </head>
 <body>
+
+<section id="section-cabecalho">
     <h1>Conversor Monetário</h1>
     <p>Digite um valor a ser convertido</p>
+</section>
 
+<section id="section-selecao">
     <label>De: </label>
-    <select id="origem"></select>
-
+    <select name="moeda-select" id="origem"></select>
     <label>Para: </label>
-    <select id="destino"></select>
-    
-    <input type="number" id="valorEntrada" onchange="" placeholder="Digite um valor...">
+    <select name="moeda-select" id="destino"></select>
+</section>
+
+<section id="section-valorentrada">
+    <input type="number" id="valorEntrada" onchange="moedaCalcular()" placeholder="Digite um valor...">
+</section>
+
 </body>
 </html>

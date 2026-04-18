@@ -1,0 +1,5 @@
+[
+    { "codigo": "BRL", "nome": "Real Brasileiro"},
+    { "codigo": "USD", "nome": "Dólar Americano"},
+    { "codigo": "EUR", "nome": "Euro"}
+]
