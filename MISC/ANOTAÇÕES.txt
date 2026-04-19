@@ -9,6 +9,9 @@ conversor.js(Ln 17, Col 1):
         calculo = operaçao(fator1, fator2)
         formataçao = funçaoformatar.formatar(calculo)
         mostrar = funçaomostrar(formataçao)
+
+        //1 USD = 4,990 BRL
+        //1 BRL = 0,20 USD
 -------------------ANOTAÇÕES-------------------
 
 ---------------CÓDIGO DESCARTADO---------------
@@ -29,5 +32,22 @@ conversor.js:
 ºif (document.getElementById("moeda-select").value === "BRL"){
     dados.taxaCambio = 0.20
 };
+
+º/*const moedas = [
+    { codigo: 'BRL', nome: 'Real' },
+    { codigo: 'USD', nome: 'Dólar' }
+]*/
+
+º/*if(COMPONENTES_HTML.seletor1.value === COMPONENTES_HTML.seletor2.value){
+          //alert("Não é possível selecionar a mesma opção duas vezes.")
+            const outraOpcao = moedas.find(m => m.codigo !== event.target.value);
+            
+            if(event.target === COMPONENTES_HTML.seletor1){
+            COMPONENTES_HTML.seletor2.value = outraOpcao.codigo;
+            } else {
+                COMPONENTES_HTML.seletor1.value = outraOpcao.codigo;
+                }
+        moedaCalcular();
+    }*/
 ---------------CÓDIGO DESCARTADO---------------
 */

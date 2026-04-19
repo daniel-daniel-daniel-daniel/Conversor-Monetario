@@ -1,5 +1,5 @@
 [
-    { "codigo": "BRL", "nome": "Real Brasileiro"},
-    { "codigo": "USD", "nome": "Dólar Americano"},
-    { "codigo": "EUR", "nome": "Euro"}
+    { "locale": "pt-BR", "codigo": "BRL", "nome": "Real Brasileiro", "taxaCambio": 1.00 },
+    { "locale": "en-US", "codigo": "USD", "nome": "Dólar Americano", "taxaCambio": 4.99 },
+    { "locale": "de-DE", "codigo": "EUR", "nome": "Euro", "taxaCambio": 5.86 }
 ]

@@ -1,53 +1,47 @@
-/*class moedaConverter {
-    static paraBRL(valorInput) {
-        return new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        }).format(valorInput)}
+import { COMPONENTES_HTML, MOEDAS } from "./config.js";
+
+//a=valor(input)  b1=taxaCambioOrigem  b2=taxaCambioDestino
+function moedaCalculoFormula(a, b1, b2){
+    return (a*b1/b2)
+}
+
+export async function moedaCalcular(){
+    //👇pega a lista de moedas do json e transforma em array de objetos (sim, fui EU quem disse isso😝😝)
+    const moedas = await MOEDAS();
     
-    static paraUSD(valorInput) {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD'
-        }).format(valorInput)}
-
-
-}
-*/
-
-
-function moedaCalcular() {
-
-const dados = {
-    valor: Number(document.getElementById("valorEntrada").value),
-    taxaCambio: 0
-}
-
-const moedaSelecionada = document.getElementById("moeda-select").value
-
-
-let formatar = ""
-let converterPara= ""
-
-//1 USD = 4,990 BRL
-//1 BRL = 0,20 USD
-switch(moedaSelecionada){
-    case "BRL":
-        dados.taxaCambio = 0.20
-        formatar=moedaConverter.paraBRL(dados.valor*4.99)
+    let resultado = 0;
+    
+    switch(COMPONENTES_HTML.seletor1.value){
+        case "BRL":
+            switch(COMPONENTES_HTML.seletor2.value){
+            case "USD":
+                resultado = moedaCalculoFormula(COMPONENTES_HTML.textInput.value, moedas.find(m => m.codigo === "BRL").taxaCambio, moedas.find(m => m.codigo === "USD").taxaCambio)
+                break;
+            case "EUR":
+                resultado = moedaCalculoFormula(COMPONENTES_HTML.textInput.value, moedas.find(m => m.codigo === "BRL").taxaCambio, moedas.find(m => m.codigo === "EUR").taxaCambio)
+                break;
+            }
         break;
     case "USD":
-        dados.taxaCambio = 4.990
-        formatar=moedaConverter.paraUSD(dados.valor*0.20)
+        switch(COMPONENTES_HTML.seletor2.value){
+            case "BRL":
+                resultado = moedaCalculoFormula(COMPONENTES_HTML.textInput.value, moedas.find(m => m.codigo === "USD").taxaCambio, moedas.find(m => m.codigo === "BRL").taxaCambio)
+                break;
+            case "EUR":
+                resultado = moedaCalculoFormula(COMPONENTES_HTML.textInput.value, moedas.find(m => m.codigo === "USD").taxaCambio, moedas.find(m => m.codigo === "EUR").taxaCambio)
+                break;
+        }
         break;
-}
-
-//const converter = dados.valor * dados.taxaCambio
-
-
-
-
-const mensagemResultado = `Conversão: ${document.getElementById("moeda-select")} + formatar`
-
-document.getElementById("resultadoFinal").innerText = mensagemResultado
+    case "EUR":
+        switch(COMPONENTES_HTML.seletor2.value){
+            case "BRL":
+                resultado = moedaCalculoFormula(COMPONENTES_HTML.textInput.value, moedas.find(m => m.codigo === "EUR").taxaCambio, moedas.find(m => m.codigo === "BRL").taxaCambio)
+                break;
+            case "USD":
+                resultado = moedaCalculoFormula(COMPONENTES_HTML.textInput.value, moedas.find(m => m.codigo === "EUR").taxaCambio, moedas.find(m => m.codigo === "USD").taxaCambio)
+                break;
+        }
+        break;
+    }
+    COMPONENTES_HTML.resultado.innerText = resultado.toLocaleString(moedas.find(m => m.codigo === COMPONENTES_HTML.seletor2.value), {style: 'currency', currency: COMPONENTES_HTML.seletor2.value})
 }
