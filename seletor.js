@@ -1,5 +1,5 @@
 import { COMPONENTES_HTML, MOEDAS } from "./config.js";
-import { moedaCalcular } from "./conversor.js";
+/*import { MoedaCalcular } from "./conversor.js";*/
 
 export class Seletor {
     constructor() {
