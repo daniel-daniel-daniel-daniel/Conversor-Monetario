@@ -1,5 +1,7 @@
 import { COMPONENTES_HTML, MOEDAS } from "./config.js";
-/*import { MoedaCalcular } from "./conversor.js";*/
+import { MoedaCalcular } from "./conversor.js";
+
+calculadora = new MoedaCalcular()
 
 export class Seletor {
     constructor() {
@@ -26,11 +28,16 @@ export class Seletor {
         
 
     const ifTextEmptyVerify = (e) => {
-            if (!COMPONENTES_HTML.textInput.value) {
+            if (!COMPONENTES_HTML.textInput.value || isNaN) {
+            
+            calculadora.moedaConversor();
+            
             COMPONENTES_HTML.resultado.style.display = "none";
         } else {
             this.validarSelecao(e, moedas);
-            moedaCalcular();
+            
+            calculadora.moedaConversor();
+            
             COMPONENTES_HTML.resultado.style.display = "block";
         }
     
@@ -50,11 +57,21 @@ export class Seletor {
         
         this.validarSelecao({target: COMPONENTES_HTML.seletor1 }, moedas);
 
-        COMPONENTES_HTML.seletor1.addEventListener("change", (e) => {this.validarSelecao(e, moedas);
+        COMPONENTES_HTML.seletor1.addEventListener("change", (e) => {
+            this.validarSelecao(e, moedas);
+            if (COMPONENTES_HTML.textInput.value){
+                calculadora.moedaConversor();
+            }
         });
-        COMPONENTES_HTML.seletor2.addEventListener("change", (e) => {this.validarSelecao(e, moedas);
+        
+        COMPONENTES_HTML.seletor2.addEventListener("change", (e) => {
+            this.validarSelecao(e, moedas);
+            if (COMPONENTES_HTML.textInput.value){
+                calculadora.moedaConversor();
+            }
+            
         });
-
+        
     }
 }
 new Seletor();

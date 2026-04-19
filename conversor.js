@@ -1,53 +1,37 @@
-class moedaConverter {
-    static paraBRL(valorInput) {
-        return new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        }).format(valorInput)}
+import { COMPONENTES_HTML, MOEDAS } from "./config.js";
+
+export async class MoedaCalcular{
+    constructor() {
+        this.moedas = [];
+    }
+    async init() {
+        this.moedas = await MOEDAS();
+    }
+
+    moedaCalculoFormula(valor, taxaOrigem, taxaDestino){
+    return (valor / taxaOrigem) * taxaDestino;
+    }
+
+    moedaConversor() {
+    const origem = this.moedas.find(m => m.codigo === COMPONENTES_HTML.seletor1.value);
+    const destino = this.moedas.find(m => m.codigo === COMPONENTES_HTML.seletor2.value);
+    const valorInput = parseFloat(COMPONENTES_HTML.textInput.value);
     
-    static paraUSD(valorInput) {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD'
-        }).format(valorInput)}
+    if (isNaN(valorInput)) return;
+    
+    
+    
+    const resultadoCalculado = 
+        this.moedaCalculoFormula(
+        parseFloat(valorInput),
+        origem.taxaCambio, 
+        destino.taxaCambio
+    );
 
-
-}
-
-
-
-function moedaCalcular() {
-
-const dados = {
-    valor: Number(document.getElementById("valorEntrada").value),
-    taxaCambio: 0
-}
-
-const moedaSelecionada = document.getElementById("moeda-select").value
-
-
-let formatar = ""
-let converterPara= ""
-
-//1 USD = 4,990 BRL
-//1 BRL = 0,20 USD
-switch(moedaSelecionada){
-    case "BRL":
-        dados.taxaCambio = 0.20
-        formatar=moedaConverter.paraBRL(dados.valor*4.99)
-        break;
-    case "USD":
-        dados.taxaCambio = 4.990
-        formatar=moedaConverter.paraUSD(dados.valor*0.20)
-        break;
-}
-
-//const converter = dados.valor * dados.taxaCambio
-
-
-
-
-const mensagemResultado = `Conversão: ${document.getElementById("moeda-select")} + formatar`
-
-document.getElementById("resultadoFinal").innerText = mensagemResultado
+    COMPONENTES_HTML.resultado.innerText = resultadoCalculado.toLocaleString(destino.locale, 
+    { 
+        style: 'currency', 
+        currency: this.destino.codigo
+        });
+    }
 }

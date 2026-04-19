@@ -7,11 +7,15 @@ import { Seletor } from "./seletor.js";
 async function configurarEventoInput() {
     const moedas = await MOEDAS();
 
+    const calculadora = new MoedaCalcular();
+    await calculadora.init();
+
     COMPONENTES_HTML.textInput.addEventListener("input", () => {
         if(!COMPONENTES_HTML.textInput.value) {
          COMPONENTES_HTML.resultado.style.display = "none"
         } else {
-            MoedaCalcular();
+            calculadora.moedaConversor();
+            
             COMPONENTES_HTML.resultado.style.display = "block";
         }
     });
