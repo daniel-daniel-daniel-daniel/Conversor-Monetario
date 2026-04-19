@@ -1,8 +1,8 @@
 import { COMPONENTES_HTML, MOEDAS } from "./config.js";
-import { moedaCalcular } from "./conversor.js";
+import { MoedaCalcular } from "./conversor.js";
 import { Seletor } from "./seletor.js";
 
-
+//const moedaCalcular = new MoedaCalcular();
 
 async function configurarEventoInput() {
     const moedas = await MOEDAS();
@@ -11,7 +11,7 @@ async function configurarEventoInput() {
         if(!COMPONENTES_HTML.textInput.value) {
          COMPONENTES_HTML.resultado.style.display = "none"
         } else {
-            moedaCalcular(); 
+            MoedaCalcular();
             COMPONENTES_HTML.resultado.style.display = "block";
         }
     });
