@@ -1,3 +1,7 @@
+let formatar = ""
+let converterPara= ""
+
+
 class moedaConverter {
     static paraBRL(valorInput) {
         return new Intl.NumberFormat('pt-BR', {
@@ -23,22 +27,20 @@ const dados = {
     taxaCambio: 0
 }
 
-const moedaSelecionada = document.getElementById("moeda-select").value
+const moedaSelecionada = document.getElementById("origem").value
 
-
-let formatar = ""
-let converterPara= ""
-
-//1 USD = 4,990 BRL
-//1 BRL = 0,20 USD
 switch(moedaSelecionada){
     case "BRL":
         dados.taxaCambio = 0.20
         formatar=moedaConverter.paraBRL(dados.valor*4.99)
         break;
     case "USD":
-        dados.taxaCambio = 4.990
+        dados.taxaCambio = 4.99
         formatar=moedaConverter.paraUSD(dados.valor*0.20)
+        break;
+    case "EUR":
+        dados.taxaCambio = 5.86
+        formatar=moedaConverter.paraEUR(dados.valor*5.86)
         break;
 }
 
@@ -47,7 +49,7 @@ switch(moedaSelecionada){
 
 
 
-const mensagemResultado = `Conversão: ${document.getElementById("moeda-select")} + formatar`
+const mensagemResultado = `Conversão: ${formatar}`
 
 document.getElementById("resultadoFinal").innerText = mensagemResultado
 }
