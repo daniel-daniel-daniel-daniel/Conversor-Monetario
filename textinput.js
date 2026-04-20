@@ -1,8 +1,5 @@
 import { COMPONENTES_HTML, MOEDAS } from "./config.js";
 import { calculadora } from "./conversor.js";
-//import { Seletor } from "./seletor.js";
-
-//const moedaCalcular = new MoedaCalcular();
 
 async function configurarEventoInput() {
     await calculadora.init();

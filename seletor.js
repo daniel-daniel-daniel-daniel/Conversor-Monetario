@@ -7,19 +7,16 @@ export class Seletor {
 
     }
 
-    async validarSelecao(event, moedas, oi) {
-        let valorOrigem = COMPONENTES_HTML.seletor1.value;
-        let valorDestino = COMPONENTES_HTML.seletor2.value;
-        var valorInput = COMPONENTES_HTML.textInput.value;
-       /* if(valorOrigem === valorDestino) {
-            valorDestino = moedas.find(m => m.codigo !== valorOrigem).codigo
-        };*/
+    async validarSelecao(event, moedas) {
+        const valorOrigem = COMPONENTES_HTML.seletor1.value;
+        const valorDestino = COMPONENTES_HTML.seletor2.value;
+        const valorInput = COMPONENTES_HTML.textInput.value;
+    
         const outraOpcao1 = moedas.find(m => m.codigo !== valorOrigem).codigo
-        const outraOpcao2 = moedas.find(m => m.codigo !== valorDestino).codigo
   
         if (valorOrigem === valorDestino) {
-            console.log("oi")
             COMPONENTES_HTML.seletor2.value = outraOpcao1};
+
         for (let opt of COMPONENTES_HTML.seletor1.options) {
             if (opt.value === valorDestino) {
                 opt.hidden = true;   
@@ -30,20 +27,16 @@ export class Seletor {
         for (let opt of COMPONENTES_HTML.seletor2.options) {
             if (opt.value === valorOrigem) {
                 opt.hidden = true;
-              //  COMPONENTES_HTML.seletor2.appendChild(opt);
             } else {
                 opt.hidden = false;
             }
         };
         
-         //👇👇👇BLOQUEIA OPÇÃO JÁ SELECIONADA NOS SELETORES
-        const seletor1Options = Array.from(COMPONENTES_HTML.seletor1.options); 
-        const seletor2Options = Array.from(COMPONENTES_HTML.seletor2.options); 
-        const outraOption = moedas.find(moeda => moeda.codigo !== valorDestino)
 
-        
+        //const seletor1Options = Array.from(COMPONENTES_HTML.seletor1.options); 
+        //const seletor2Options = Array.from(COMPONENTES_HTML.seletor2.options); 
+        //const outraOption = moedas.find(moeda => moeda.codigo !== valorDestino)
 
-        //ADIÇÃO DE IMAGEM NO LABEL DO INPUT, DE ACORDO COM A MOEDA SELECIONADA 👇👇👇
         const textInputLabel = document.getElementById("label-textINPUT");
         if (textInputLabel) {
             const moedaObj = moedas.find(m => m.codigo === valorOrigem);
@@ -51,8 +44,7 @@ export class Seletor {
             textInputLabel.innerHTML = `<img src="./assets/${moedaObj.codigo}.png"
             style="width: 20px; height: 20px; object-fit: cover; vertical-align: middle; border-radius: 3px; border: 1px solid #ccc;">`;
         };
-        //////////////////////////////////////////////////////////////////////////////////////
-        //VERIFICAÇÃO - CAMPO DE TEXTO VAZIO? SE SIM IGNORAR TUDO ABAIXO👇👇👇
+
         if (!valorInput || valorInput <= 0) {
             COMPONENTES_HTML.resultado.style.display = "none";
             COMPONENTES_HTML.resultado.innerText = "";
@@ -61,7 +53,7 @@ export class Seletor {
         
 };
 
-    async inverterMoedas(moedas) {
+    inverterMoedas(moedas) {
             [COMPONENTES_HTML.seletor1.value, COMPONENTES_HTML.seletor2.value] = [COMPONENTES_HTML.seletor2.value, COMPONENTES_HTML.seletor1.value]
             this.validarSelecao(event, moedas);
             calculadora.moedaConversor();
@@ -70,29 +62,31 @@ export class Seletor {
     async configurarSelects() {
         await calculadora.init();
         const moedas = await MOEDAS();
-        //GERAÇÃO DE SELETORES👇👇👇/////////////////////////////////////////////////
+
         const optionsHTML = moedas.map(m => `<option value=${m.codigo}>${m.nome}</option>`).join('\n');
     
         COMPONENTES_HTML.seletor1.innerHTML = optionsHTML;
         COMPONENTES_HTML.seletor2.innerHTML = optionsHTML;
-        //valor padrão quando o user entra na página👇👇👇
+
         COMPONENTES_HTML.seletor1.value = "BRL";
         COMPONENTES_HTML.seletor2.value = "USD";
-        ////////////////////////////////////////////////////////////////////////
+
             this.validarSelecao({target: COMPONENTES_HTML.seletor1 }, moedas);
-        //EVENT LISTENERS 👇👇👇////////////////////////////////////////
+
         COMPONENTES_HTML.seletor1.addEventListener("change", (e) => {
-            this.inverterMoedas(moedas);
+            this.validarSelecao(event, moedas);
+            calculadora.moedaConversor();
             });
         
         COMPONENTES_HTML.seletor2.addEventListener("change", (e) => {
-            this.inverterMoedas(moedas);
+            this.validarSelecao(event, moedas);
+            calculadora.moedaConversor();
             });
         
         COMPONENTES_HTML.botaoSwap.addEventListener("click", (e) => {
             this.inverterMoedas(moedas);
             })
-            ///////////////////////////////////////////////////////
+
         };
     }
 
