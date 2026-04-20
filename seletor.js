@@ -7,20 +7,22 @@ export class Seletor {
 
     }
 
-    async validarSelecao(event, moedas) {
-        const valorOrigem = COMPONENTES_HTML.seletor1.value;
-        const valorDestino = COMPONENTES_HTML.seletor2.value;
-        const valorInput = COMPONENTES_HTML.textInput.value;
-
-         //👇👇👇BLOQUEIA OPÇÃO JÁ SELECIONADA NOS SELETORES
-        const seletor1Options = Array.from(COMPONENTES_HTML.seletor1.options); 
-        const seletor2Options = Array.from(COMPONENTES_HTML.seletor2.options); 
-        const outraOption = moedas.find(moeda => moeda.codigo !== valorDestino)
-
+    async validarSelecao(event, moedas, oi) {
+        let valorOrigem = COMPONENTES_HTML.seletor1.value;
+        let valorDestino = COMPONENTES_HTML.seletor2.value;
+        var valorInput = COMPONENTES_HTML.textInput.value;
+       /* if(valorOrigem === valorDestino) {
+            valorDestino = moedas.find(m => m.codigo !== valorOrigem).codigo
+        };*/
+        const outraOpcao1 = moedas.find(m => m.codigo !== valorOrigem).codigo
+        const outraOpcao2 = moedas.find(m => m.codigo !== valorDestino).codigo
+  
+        if (valorOrigem === valorDestino) {
+            console.log("oi")
+            COMPONENTES_HTML.seletor2.value = outraOpcao1};
         for (let opt of COMPONENTES_HTML.seletor1.options) {
             if (opt.value === valorDestino) {
-                opt.hidden = true;
-               // COMPONENTES_HTML.seletor1.appendChild(opt);
+                opt.hidden = true;   
             } else {
                 opt.hidden = false;
             }
@@ -33,12 +35,13 @@ export class Seletor {
                 opt.hidden = false;
             }
         };
-        //CHECA SE AMBOS SELETORES TÊM O MESMO VALOR > SUBSTITUI UM DELES CASO TRUE///////////
-        /*if(valorOrigem === valorDestino) {
-            COMPONENTES_HTML.seletor1.value = outraOption.codigo
-            COMPONENTES_HTML.seletor2.value = outraOption.codigo
-            //this.validarSelecao(event, moedas);
-        };*/
+        
+         //👇👇👇BLOQUEIA OPÇÃO JÁ SELECIONADA NOS SELETORES
+        const seletor1Options = Array.from(COMPONENTES_HTML.seletor1.options); 
+        const seletor2Options = Array.from(COMPONENTES_HTML.seletor2.options); 
+        const outraOption = moedas.find(moeda => moeda.codigo !== valorDestino)
+
+        
 
         //ADIÇÃO DE IMAGEM NO LABEL DO INPUT, DE ACORDO COM A MOEDA SELECIONADA 👇👇👇
         const textInputLabel = document.getElementById("label-textINPUT");
@@ -58,8 +61,7 @@ export class Seletor {
         
 };
 
-    async inverterMoedas() {
-        const moedas = await MOEDAS();
+    async inverterMoedas(moedas) {
             [COMPONENTES_HTML.seletor1.value, COMPONENTES_HTML.seletor2.value] = [COMPONENTES_HTML.seletor2.value, COMPONENTES_HTML.seletor1.value]
             this.validarSelecao(event, moedas);
             calculadora.moedaConversor();
@@ -80,19 +82,15 @@ export class Seletor {
             this.validarSelecao({target: COMPONENTES_HTML.seletor1 }, moedas);
         //EVENT LISTENERS 👇👇👇////////////////////////////////////////
         COMPONENTES_HTML.seletor1.addEventListener("change", (e) => {
-            this.validarSelecao(e, moedas);
-            calculadora.moedaConversor();
+            this.inverterMoedas(moedas);
             });
         
         COMPONENTES_HTML.seletor2.addEventListener("change", (e) => {
-            this.validarSelecao(e, moedas);
-            calculadora.moedaConversor();
+            this.inverterMoedas(moedas);
             });
         
         COMPONENTES_HTML.botaoSwap.addEventListener("click", (e) => {
-            this.inverterMoedas();
-            this.validarSelecao(e, moedas);
-            calculadora.moedaConversor();
+            this.inverterMoedas(moedas);
             })
             ///////////////////////////////////////////////////////
         };

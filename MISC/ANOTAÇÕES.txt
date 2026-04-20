@@ -141,4 +141,9 @@ conversor.js:
 
 
 grava o estado das seleçoes (seletor1 na opçao 1 // seletor 2 na opçao 2) -> 
-seletor 1 = opçao do seletor 2 // seletor 2 = opçao do seletor 1 ->
+seletor 1 = opçao do seletor 2 // seletor 2 = opçao do seletor 1 ->7
+
+
+
+
+//CHECA SE AMBOS SELETORES TÊM O MESMO VALOR > SUBSTITUI UM DELES CASO TRUE///////////
