@@ -1,26 +1,25 @@
 import { COMPONENTES_HTML, MOEDAS } from "./config.js";
-import { MoedaCalcular } from "./conversor.js";
-import { Seletor } from "./seletor.js";
+import { calculadora } from "./conversor.js";
+//import { Seletor } from "./seletor.js";
 
 //const moedaCalcular = new MoedaCalcular();
 
 async function configurarEventoInput() {
-    const moedas = await MOEDAS();
-
-    const calculadora = new MoedaCalcular();
     await calculadora.init();
 
     COMPONENTES_HTML.textInput.addEventListener("input", () => {
-        if(!COMPONENTES_HTML.textInput.value) {
-         COMPONENTES_HTML.resultado.style.display = "none"
+        const valor = COMPONENTES_HTML.textInput.value;
+
+        if (!valor) {
+            COMPONENTES_HTML.resultado.style.display = "none";
+            COMPONENTES_HTML.resultado.innerText = ""
+        } else if (valor < 0){
+            COMPONENTES_HTML.textInput.value = 0
         } else {
             calculadora.moedaConversor();
-            
             COMPONENTES_HTML.resultado.style.display = "block";
         }
+
     });
-    /*COMPONENTES_HTML.textInput.addEventListener("input", () => {
-    document.getElementById("label-textINPUT").innerHTML = `${COMPONENTES_HTML.seletor1.value}`
-    });*/
 }
 configurarEventoInput();

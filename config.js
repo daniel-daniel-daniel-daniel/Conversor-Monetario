@@ -4,7 +4,8 @@ export const COMPONENTES_HTML = {
     seletor1: document.getElementById("origem"),
     seletor2: document.getElementById("destino"),
     resultado: document.getElementById("resultadoFinal"),
-    textInput: document.getElementById("valorEntrada")
+    textInput: document.getElementById("valorEntrada"),
+    botaoSwap: document.getElementById("button-SWAP")
 };
 
 export async function MOEDAS() {

@@ -85,5 +85,60 @@ conversor.js:
         break;
     }
     COMPONENTES_HTML.resultado.innerText = resultado.toLocaleString(moedas.find(m => m.codigo === COMPONENTES_HTML.seletor2.value), {style: 'currency', currency: COMPONENTES_HTML.seletor2.value})*/
+
+    º/*COMPONENTES_HTML.textInput.addEventListener("input", () => {
+        if(!COMPONENTES_HTML.textInput.value) {
+         COMPONENTES_HTML.resultado.style.display = "none"
+        } else {
+            calculadora.moedaConversor();
+            
+            COMPONENTES_HTML.resultado.style.display = "block";
+        }
+    });*/
+    /*COMPONENTES_HTML.textInput.addEventListener("input", () => {
+    document.getElementById("label-textINPUT").innerHTML = `${COMPONENTES_HTML.seletor1.value}`
+    */
+
+º/*const ifTextEmptyVerify = (e) => {
+            if (!COMPONENTES_HTML.textInput.value) {
+            
+            calculadora.moedaConversor();
+            
+            COMPONENTES_HTML.resultado.style.display = "none";
+        } else {
+            this.validarSelecao(e, moedas);
+            
+            calculadora.moedaConversor();
+            
+            COMPONENTES_HTML.resultado.style.display = "block";
+        }
+    
+        if (COMPONENTES_HTML.textInput.value){
+                calculadora.moedaConversor();
+            }
+    
+    };*/
+
+º/*switch (COMPONENTES_HTML.seletor1.value === COMPONENTES_HTML.seletor2.value){
+            case true:
+                COMPONENTES_HTML.seletor1.value = outraOpcao
+            break;
+
+            case false:
+            
+        };*/
+
+º      /*seletor1Options.forEach(htmlOption => {
+            htmlOption.disabled = (htmlOption.value === valorDestino);
+        });
+        seletor2Options.forEach(htmlOption => {
+            htmlOption.disabled = (htmlOption.value === valorOrigem);
+        });*/
+        
 ---------------CÓDIGO DESCARTADO---------------
-*/
+*/ 
+
+
+
+grava o estado das seleçoes (seletor1 na opçao 1 // seletor 2 na opçao 2) -> 
+seletor 1 = opçao do seletor 2 // seletor 2 = opçao do seletor 1 ->
