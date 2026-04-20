@@ -12,7 +12,7 @@ export class MoedaCalcular{
     }
 
     moedaCalculoFormula(valor, taxaOrigem, taxaDestino){
-    return (valor * taxaOrigem) / taxaDestino;
+    return (valor / taxaOrigem) * taxaDestino;
     }
 
     moedaConversor() {
