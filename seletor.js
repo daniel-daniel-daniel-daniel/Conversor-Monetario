@@ -34,11 +34,11 @@ export class Seletor {
             }
         };
         //CHECA SE AMBOS SELETORES TÊM O MESMO VALOR > SUBSTITUI UM DELES CASO TRUE///////////
-        if(valorOrigem === valorDestino) {
+        /*if(valorOrigem === valorDestino) {
             COMPONENTES_HTML.seletor1.value = outraOption.codigo
             COMPONENTES_HTML.seletor2.value = outraOption.codigo
             //this.validarSelecao(event, moedas);
-        };
+        };*/
 
         //ADIÇÃO DE IMAGEM NO LABEL DO INPUT, DE ACORDO COM A MOEDA SELECIONADA 👇👇👇
         const textInputLabel = document.getElementById("label-textINPUT");
@@ -90,9 +90,9 @@ export class Seletor {
             });
         
         COMPONENTES_HTML.botaoSwap.addEventListener("click", (e) => {
+            this.inverterMoedas();
             this.validarSelecao(e, moedas);
             calculadora.moedaConversor();
-            this.inverterMoedas();
             })
             ///////////////////////////////////////////////////////
         };
