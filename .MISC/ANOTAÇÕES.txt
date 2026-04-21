@@ -2,7 +2,7 @@
 -------------------ANOTAÇÕES-------------------
 conversor.js(Ln 17, Col 1):
 
-    lógica da funçao em pseudocodigo:
+    lógica da funçao:
     objetivo:ReceberDados>Calcular>Formatar>Mostrar
 
         dados: fator1=input // fator2=taxacambio
