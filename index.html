@@ -6,62 +6,90 @@
     <title>Conversor Monetário</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script type="module" src="js/config-vue.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   </head>
   <body>
     <div id="app">
       <header>
-        <div id="txt">
+        <div class="titulo">
           <h1>Conversor Monetário</h1>
           <p>Digite um valor a ser convertido</p>
         </div>
       </header>
-
-      <section id="SELECAO">
-        <div id="txt">
-          <label for="origem">De: </label>
+      <main class="converter-wrapper">
+        <div class="seletores-container">
+          <label for="seletor1" class="visually-hidden">De: </label>
+          <div class="custom-select-wrapper">
+            <div
+              id="seletor1-trigger"
+              class="input-custom custom-select-trigger"
+              @click="toggleDropdown('origem')"
+            >
+              {{ moedas.find(m => m.codigo === valOrig)?.nome || 'Selecione' }}
+            </div>
+            <ul class="custom-options" v-show="dropdownOpen.origem">
+              <li
+                v-for="moeda in moedas"
+                v-show="moeda.codigo !== valDest"
+                :key="moeda.codigo"
+                @click="selectOption(moeda.codigo, 'origem')"
+                class="custom-option-item"
+              >
+                {{ moeda.nome }}
+              </li>
+            </ul>
+          </div>
+          <label for="seletor2" class="visually-hidden">Para: </label>
+          
+          <div class="custom-select-wrapper">
+            <div
+              id="seletor2-trigger"
+              class="input-custom custom-select-trigger"
+              @click="toggleDropdown('destino')"
+            >
+              {{ moedas.find(m => m.codigo === valDest)?.nome || 'Selecione' }}
+            </div>
+            <ul class="custom-options" v-show="dropdownOpen.destino">
+              <li
+                v-for="moeda in moedas"
+                v-show="moeda.codigo !== valOrig"
+                :key="moeda.codigo"
+                @click="selectOption(moeda.codigo, 'destino')"
+                class="custom-option-item"
+              >
+                {{ moeda.nome }}
+              </li>
+            </ul>
+          </div>
         </div>
-        <select id="origem" v-model="valOrig">
-          <option
-            v-for="moeda in moedas"
-            :key="moeda.codigo"
-            :value="moeda.codigo"
-          >
-            {{ moeda.nome }}
-          </option>
-        </select>
 
-        <label for="destino">Para: </label>
+        <div class="botao">
+          <button id="botao-swap" class="input-custom" @click="inverterMoedas">
+            ⮂
+          </button>
+        </div>
 
-        <select id="destino" v-model="valDest">
-          <option
-            v-for="moeda in moedas"
-            :key="moeda.codigo"
-            :value="moeda.codigo"
-          >
-            {{moeda.nome}}
-          </option>
-        </select>
-        <section id="botao">
-          <button @click="inverterMoedas">⮂</button>
-        </section>
-      </section>
-
-      <section id="textINPUT">
-        <label for="valorEntrada" id="label-textINPUT"></label>
-        <div id="txt">
+        <div class="input-valor">
           <input
+            id="input-valor"
+            class="input-custom"
             type="number"
             v-model.number="valInput"
             placeholder="Digite um valor..."
           />
         </div>
-      </section>
 
-      <section id="RESULTADO">
-        <div id="txt">
+        <div class="converter-section" id="RESULTADO">
           <p id="resultadoFinal">{{ resultadoFinal }}</p>
         </div>
-      </section>
+      </main>
+
+      <div class="converter-section" id="EXTRAS">
+        <h2>Curiosidades</h2>
+        <p v-html="maisValor"></p>
+        <p v-html="menosValor"></p>
+      </div>
     </div>
   </body>
 </html>
